@@ -22,7 +22,8 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "log4js": "^6.9.1",
-    "mongoose": "^8.2.4",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
     "morgan": "~1.9.1",
     "path": "^0.12.7",
     "rimraf": "^5.0.5"

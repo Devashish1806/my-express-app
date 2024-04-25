@@ -1,5 +1,7 @@
 import { Logger } from "../../utils/log4js.util";
-import { Router } from "express";
+import { Router, Request, Response } from "express";
+import { AdminController } from "../admin.controller";
+import { UserController } from "./user.controller";
 
 export class UserRouter {
   private static __router: Router = null;
@@ -15,10 +17,12 @@ export class UserRouter {
     return UserRouter.__router;
   }
 
+  public async getUsers(req: Request, res: Response) {
+    UserController.getInstance().getUsers(req, res);
+  }
+
   init() {
     Logger.log.info("User route init triggered");
-    UserRouter.__router.get("/", () => {
-      Logger.log.log("User is trigerred");
-    });
+    UserRouter.__router.get("/", this.getUsers);
   }
 }
