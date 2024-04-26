@@ -31,4 +31,16 @@ export abstract class BaseDao {
       return error;
     }
   }
+
+  public async add(payload: any): Promise<any> {
+    Logger.log.debug(`Add: [${this.collection}]`);
+    let db = await BaseDao.getDBConnection();
+    try {
+      let result = await db.collection(this.collection).insertOne(payload);
+      return result;
+    } catch (error) {
+      Logger.log.error(`Adding records failed! `, error);
+      return error;
+    }
+  }
 }

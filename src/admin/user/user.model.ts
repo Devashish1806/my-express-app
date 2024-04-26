@@ -1,7 +1,4 @@
-export const userSchema = {
-  name: String,
-  date: {
-    type: Date,
-    default: Date.now(),
-  },
-};
+export interface UserSchema {
+  name: String;
+  date: Date;
+}

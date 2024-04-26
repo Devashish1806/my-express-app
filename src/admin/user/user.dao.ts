@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
 import { BaseDao } from "../../utils/web/base.dao";
+import { UserSchema } from "./user.model";
 
 export class UserDao extends BaseDao {
   private static __instance: UserDao = null;
   private constructor() {
-    super("postmodels");
+    super("user");
   }
 
   public static getNewInstance(): UserDao {
@@ -16,5 +16,10 @@ export class UserDao extends BaseDao {
 
   public async getUsers() {
     return this.findAll();
+  }
+
+  public async addUser(user: UserSchema) {
+    user.date = new Date();
+    return this.add(user);
   }
 }

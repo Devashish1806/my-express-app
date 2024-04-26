@@ -21,4 +21,10 @@ export class UserController {
       res.send(user);
     });
   }
+
+  public async addUser(req: Request, res: Response): Promise<any> {
+    this.__dao.addUser(req.body).then((result) => {
+      res.send(result);
+    });
+  }
 }

@@ -21,8 +21,13 @@ export class UserRouter {
     UserController.getInstance().getUsers(req, res);
   }
 
+  public async addUser(req: Request, res: Response) {
+    UserController.getInstance().addUser(req, res);
+  }
+
   init() {
     Logger.log.info("User route init triggered");
     UserRouter.__router.get("/", this.getUsers);
+    UserRouter.__router.post("/", this.addUser);
   }
 }

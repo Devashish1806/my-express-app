@@ -26,11 +26,24 @@
     "mongoose": "^8.3.2",
     "morgan": "~1.9.1",
     "path": "^0.12.7",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "@microsoft/recognizers-text-data-types-timex-expression": "1.1.4",
+    "botbuilder-ai": "~4.13.4",
+    "botbuilder-dialogs": "~4.13.4",
+    "botbuilder-testing": "~4.13.4",
+    "replace": "~1.2.0",
+    "restify": "~8.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "nodemon": "^3.1.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@types/dotenv": "6.1.1",
+    "@types/mocha": "^7.0.2",
+    "@types/restify": "8.4.2",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1",
+    "ts-node": "^8.10.1",
+    "tslint": "~6.1.2"
   }
 }
