@@ -11,7 +11,7 @@ export class AdminRouter extends BaseRouter {
 
   onInit(router: Router) {
     router.get("/action", this.action);
-    router.use("/user", UserRouter.getNewInstance());
+    router.use("/user", UserRouter.getInstance());
   }
 
   public action(req: Request, res: Response) {

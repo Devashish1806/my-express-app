@@ -8,7 +8,7 @@ export class AdminController extends BaseController {
 
   private constructor() {
     super();
-    this.__dao = AdminDao.getNewInstance();
+    this.__dao = AdminDao.getInstance();
   }
 
   public static getInstance() {

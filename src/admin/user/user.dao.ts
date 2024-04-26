@@ -7,7 +7,7 @@ export class UserDao extends BaseDao {
     super("user");
   }
 
-  public static getNewInstance(): UserDao {
+  public static getInstance(): UserDao {
     if (UserDao.__instance === null) {
       UserDao.__instance = new UserDao();
     }

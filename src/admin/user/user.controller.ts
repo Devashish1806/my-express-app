@@ -6,7 +6,7 @@ export class UserController {
   private __dao: UserDao;
 
   private constructor() {
-    this.__dao = UserDao.getNewInstance();
+    this.__dao = UserDao.getInstance();
   }
 
   public static getInstance() {

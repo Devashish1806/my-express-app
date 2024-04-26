@@ -10,7 +10,7 @@ export class UserRouter {
     UserRouter.__router = Router();
   }
 
-  public static getNewInstance(): Router {
+  public static getInstance(): Router {
     if (UserRouter.__router === null) {
       new UserRouter().init();
     }
