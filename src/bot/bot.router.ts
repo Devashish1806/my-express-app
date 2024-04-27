@@ -9,10 +9,10 @@ export class BotRouter extends BaseRouter {
   }
 
   public async listen(req: Request, res: Response) {
-    return BotController.getInstance().action(req, res);
+    return BotController.listen(req, res);
   }
 
   onInit(router: Router) {
-    router.post("/messages", this.listen);
+    router.post("/messages/:id", this.listen);
   }
 }

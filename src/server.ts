@@ -8,6 +8,7 @@ import { AdminRouter } from "./admin/admin.router";
 import { Module } from "./utils/application.enums";
 import { BaseRouter } from "./utils/web/base.router";
 import { BotRouter } from "./bot/bot.router";
+import { PlatformBootstrap } from "./bot/core/platform.bootstrap";
 
 async function bootStrap() {
   // get the environment variables
@@ -34,6 +35,9 @@ async function bootStrap() {
   for (let module of modules) {
     app.use(module[1].getBasePath(), module[1].getRouter());
   }
+
+  // initiate platform bot
+  await new PlatformBootstrap().init("1");
 
   // start the server
   app.listen(env.Port, () => {

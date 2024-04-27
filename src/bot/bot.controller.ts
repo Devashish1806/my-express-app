@@ -1,23 +1,16 @@
 import { Request, Response } from "express";
-import { BotService } from "./bot.service";
+import { Logger } from "../utils/log4js.util";
+import { PlatformBot } from "./core/platform.bot";
+import { PlatformCache } from "./core/platform.cache";
+
 export class BotController {
-  private static __instance: BotController = null;
-  private __service: BotService = null;
-
-  private constructor() {
-    this.__service = BotService.getInstance();
-  }
-
-  public static getInstance(): BotController {
-    if (BotController.__instance === null) {
-      BotController.__instance = new BotController();
-    }
-    return BotController.__instance;
-  }
-
-  public async action(req: Request, res: Response) {
-    return this.__service.action().then((result) => {
-      res.send(result);
+  public static async listen(req: Request, res: Response) {
+    // need to handle the bot listen event
+    Logger.log.debug("Bot message action event triggered ");
+    const bot: PlatformBot = PlatformCache.getInstance().getBot(req.params.id);
+    res.send({
+      status: 200,
+      message: `Bot [${bot.id}] message action event triggered`,
     });
   }
 }
