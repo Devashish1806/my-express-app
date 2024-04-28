@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Module } from "../utils/application.enums";
+import { Module } from "../app/app.enums";
 import { BaseRouter } from "../utils/web/base.router";
 import { BotController } from "./bot.controller";
 

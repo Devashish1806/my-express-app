@@ -1,0 +1,29 @@
+{
+  "appenders": {
+    "fileUpload": {
+      "type": "file",
+      "filename": "application.log",
+      "maxLogSize": 10000000,
+      "backups": 5,
+      "layout": {
+        "type": "pattern",
+        "pattern": "[%d{yyyy-MM-dd hh.mm.ss}] [%f{3}] [%l] [%p] : %m"
+      }
+    },
+    "console": {
+      "type": "stdout",
+      "layout": {
+        "type": "pattern",
+        "pattern": "%[[%d{yyyy-MM-dd hh.mm.ss}] [%f{3}] [%l] [%p]%] : %m"
+      }
+    }
+  },
+
+  "categories": {
+    "default": {
+      "appenders": ["fileUpload", "console"],
+      "level": "debug",
+      "enableCallStack": true
+    }
+  }
+}

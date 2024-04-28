@@ -5,17 +5,21 @@ import { EnvironmentParams } from "./utils/environment-params.util";
 import { Banner } from "./utils/banner.util";
 import { Logger } from "./utils/log4js.util";
 import { AdminRouter } from "./admin/admin.router";
-import { Module } from "./utils/application.enums";
+import { Module } from "./app/app.enums";
 import { BaseRouter } from "./utils/web/base.router";
 import { BotRouter } from "./bot/bot.router";
 import { PlatformBootstrap } from "./bot/core/platform.bootstrap";
+import { AppContext } from "./app/app.context";
 
 async function bootStrap() {
+  // Get the application context
+  const appConfig = AppContext.config.application;
+
   // get the environment variables
-  const env = EnvironmentParams.getEnvironment();
+  // const env = EnvironmentParams.getEnvironment();
 
   // load the banner
-  await Banner.load(env.Name);
+  await Banner.load(appConfig.name);
 
   // create app instance
   const app = express();
@@ -40,8 +44,8 @@ async function bootStrap() {
   await new PlatformBootstrap().init("1");
 
   // start the server
-  app.listen(env.Port, () => {
-    Logger.log.info(`Application is up and running at port: ${env.Port}`);
+  app.listen(appConfig.port, () => {
+    Logger.log.info(`Application is up and running at port: ${appConfig.port}`);
   });
 }
 

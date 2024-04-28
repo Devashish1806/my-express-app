@@ -1,10 +1,10 @@
 import { configure, getLogger } from "log4js";
-const log4jsConfig = require("./../../resources/log4js.json");
+import { AppContext } from "../app/app.context";
 
 export class Logger {
   private static createLogger() {
     const logger = getLogger();
-    configure(log4jsConfig);
+    configure(AppContext.config.log4js);
     return logger;
   }
 

@@ -1,0 +1,5 @@
+name: MY APP SERVER
+port: 3000
+environment: DEV
+microsoftAppId:
+microsoftAppSecret:

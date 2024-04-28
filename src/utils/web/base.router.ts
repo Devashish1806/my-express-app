@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { Logger } from "../log4js.util";
-import { Module } from "../application.enums";
+import { Module } from "../../app/app.enums";
 
 export abstract class BaseRouter {
   private router: Router;

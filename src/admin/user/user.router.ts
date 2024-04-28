@@ -26,7 +26,6 @@ export class UserRouter {
   }
 
   init() {
-    Logger.log.info("User route init triggered");
     UserRouter.__router.get("/", this.getUsers);
     UserRouter.__router.post("/", this.addUser);
   }
