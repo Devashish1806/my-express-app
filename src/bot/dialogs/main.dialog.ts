@@ -17,9 +17,13 @@ import {
 
 const MAIN_WATERFALL_DIALOG = "mainWaterfallDialog";
 import { BaseComponentDialog } from "./base-component.dialog";
+import {
+  IntentResult,
+  PlatformBaseRecognizer,
+} from "../core/recognizer/platform.base-recognizer";
 
 export class MainDialog extends BaseComponentDialog {
-  constructor(id: string, dialogs: [], recognizer: any) {
+  constructor(id: string, dialogs: [], recognizer: PlatformBaseRecognizer) {
     super(id);
 
     // Define the main dialog and its related components.

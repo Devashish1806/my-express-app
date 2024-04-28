@@ -1,6 +1,6 @@
-import { Logger } from "../../utils/log4js.util";
+import { Logger } from "../../../utils/log4js.util";
 
-export abstract class PlatformRecognizer {
+export abstract class PlatformBaseRecognizer {
   public async recognize(context: any): Promise<IntentResult> {
     try {
       this.preProcess(context);

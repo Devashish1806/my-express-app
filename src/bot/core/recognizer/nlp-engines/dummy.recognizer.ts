@@ -1,7 +1,14 @@
-import { NLP } from "../platform.enums";
-import { IntentResult, PlatformRecognizer } from "../platform.recognizer";
+import { NLP } from "../../platform.enums";
+import {
+  IntentResult,
+  PlatformBaseRecognizer,
+} from "../platform.base-recognizer";
 
-export class DummyRecognizer extends PlatformRecognizer {
+export class DummyNlp extends PlatformBaseRecognizer {
+  constructor(nlp: any) {
+    super();
+  }
+
   public getNLP(): string {
     return NLP.DUMMY.toString();
   }

@@ -4,3 +4,8 @@ export enum NLP {
   QNA = "QNA",
   CUSTOM = "CUSTOM",
 }
+
+export enum NlpEngine {
+  SINGLE = "single",
+  COMPOSITE = "composite",
+}
