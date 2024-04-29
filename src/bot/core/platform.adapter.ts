@@ -9,7 +9,7 @@ import { Logger } from "../../utils/log4js.util";
 
 export class PlatformAdapter extends CloudAdapter {
   constructor(
-    botFrameworkAuthentication?: ConfigurationBotFrameworkAuthentication
+    botFrameworkAuthentication: ConfigurationBotFrameworkAuthentication
   ) {
     super(botFrameworkAuthentication);
     super.onTurnError = this.onTurnErrorHandler;

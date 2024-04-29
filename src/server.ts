@@ -19,7 +19,7 @@ async function bootStrap() {
   // const env = EnvironmentParams.getEnvironment();
 
   // load the banner
-  await Banner.load(appConfig.name);
+  await Banner.load(appConfig.Name);
 
   // create app instance
   const app = express();
@@ -44,8 +44,8 @@ async function bootStrap() {
   await new PlatformBootstrap().init("1");
 
   // start the server
-  app.listen(appConfig.port, () => {
-    Logger.log.info(`Application is up and running at port: ${appConfig.port}`);
+  app.listen(appConfig.Port, () => {
+    Logger.log.info(`Application is up and running at port: ${appConfig.Port}`);
   });
 }
 

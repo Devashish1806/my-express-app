@@ -16,7 +16,7 @@ export class PlatformBot extends ActivityHandler {
   private dialog: Dialog;
   private dialogState: StatePropertyAccessor<DialogState>;
   private __adapter: PlatformAdapter;
-  private __id: string;
+  private __botId: string;
 
   /**
    *
@@ -87,14 +87,14 @@ export class PlatformBot extends ActivityHandler {
   /**
    * set adapter
    */
-  set id(id: string) {
-    this.__id = id;
+  set botId(botId: string) {
+    this.__botId = botId;
   }
 
   /**
    * get adapter
    */
-  get id(): string {
-    return this.__id;
+  get botId(): string {
+    return this.__botId;
   }
 }

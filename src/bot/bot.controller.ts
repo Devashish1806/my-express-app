@@ -7,10 +7,12 @@ export class BotController {
   public static async listen(req: Request, res: Response) {
     // need to handle the bot listen event
     Logger.log.debug("Bot message action event triggered ");
-    const bot: PlatformBot = PlatformCache.getInstance().getBot(req.params.id);
+    const platformBot: PlatformBot = PlatformCache.getInstance().getBot(
+      req.params.id
+    );
     res.send({
       status: 200,
-      message: `Bot [${bot.id}] message action event triggered`,
+      message: `Bot [${platformBot.botId}] message action event triggered`,
     });
   }
 }

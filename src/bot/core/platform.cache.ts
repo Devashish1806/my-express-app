@@ -17,13 +17,13 @@ export class PlatformCache {
   }
 
   public addBot(bot: PlatformBot) {
-    this.botCache.set(bot.id, bot);
+    this.botCache.set(bot.botId, bot);
     Logger.log.debug(
-      `Bot [${bot.id}] added to the platform cache successfully`
+      `Bot [${bot.botId}] added to the platform cache successfully`
     );
   }
 
-  public getBot(id: string) {
-    return this.botCache.get(id);
+  public getBot(botId: string) {
+    return this.botCache.get(botId);
   }
 }

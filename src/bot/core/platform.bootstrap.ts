@@ -1,12 +1,19 @@
-import { ConversationState, MemoryStorage, UserState } from "botbuilder";
+import {
+  ConfigurationBotFrameworkAuthentication,
+  ConfigurationBotFrameworkAuthenticationOptions,
+  ConversationState,
+  MemoryStorage,
+  UserState,
+} from "botbuilder";
 import { PlatformAdapter } from "./platform.adapter";
 import { PlatformBot } from "./platform.bot";
 import { DialogHub } from "./platform.dialoghub";
 import { PlatformCache } from "./platform.cache";
 import { Logger } from "../../utils/log4js.util";
+import { AppContext } from "../../app/app.context";
 
 export class PlatformBootstrap {
-  public async init(id: string) {
+  public async init(botId: string) {
     // Define a state store for your bot. See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
     // A bot requires a state store to persist the dialog and user state between messages.
     let conversationState: ConversationState;
@@ -23,22 +30,30 @@ export class PlatformBootstrap {
     const dialog = await DialogHub.getMainDialog();
 
     // Create Bot
-    const platformBot = new PlatformBot(conversationState, userState, dialog);
+    const bot = new PlatformBot(conversationState, userState, dialog);
 
     // Attach adapter
-    platformBot.adapter = this.createPlatformAdapter();
+    bot.adapter = this.createPlatformAdapter(botId);
 
     // Attach botId
-    platformBot.id = id;
+    bot.botId = botId;
 
     // add bot to platform cache
-    PlatformCache.getInstance().addBot(platformBot);
+    PlatformCache.getInstance().addBot(bot);
 
-    Logger.log.debug(`Bot: [${id}] setup completed`);
+    Logger.log.debug(`Bot: [${botId}] setup completed`);
   }
 
-  private createPlatformAdapter(): PlatformAdapter {
-    const adapter: PlatformAdapter = new PlatformAdapter();
+  private createPlatformAdapter(botId: string): PlatformAdapter {
+    const botFrameworkAuthentication =
+      new ConfigurationBotFrameworkAuthentication(
+        AppContext.config.bot[
+          botId
+        ] as ConfigurationBotFrameworkAuthenticationOptions
+      );
+    const adapter: PlatformAdapter = new PlatformAdapter(
+      botFrameworkAuthentication
+    );
     return adapter;
   }
 }
