@@ -10,9 +10,8 @@ export class BotController {
     const platformBot: PlatformBot = PlatformCache.getInstance().getBot(
       req.params.id
     );
-    res.send({
-      status: 200,
-      message: `Bot [${platformBot.botId}] message action event triggered`,
-    });
+    await platformBot.adapter.processMessageActivity(req, res, (context) =>
+      platformBot.run(context)
+    );
   }
 }

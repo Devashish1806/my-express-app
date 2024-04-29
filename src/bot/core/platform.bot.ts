@@ -57,6 +57,15 @@ export class PlatformBot extends ActivityHandler {
       // By calling next() you ensure that the next BotHandler is run.
       await next();
     });
+
+    // this.onDialog(async (context, next) => {
+    //   // Save any state changes. The load happened during the execution of the Dialog.
+    //   await this.conversationState.saveChanges(context, false);
+    //   await this.userState.saveChanges(context, false);
+
+    //   // By calling next() you ensure that the next BotHandler is run.
+    //   await next();
+    // });
   }
 
   /**
@@ -64,7 +73,6 @@ export class PlatformBot extends ActivityHandler {
    */
   public async run(context): Promise<void> {
     await super.run(context);
-
     // Save any state changes. The load happened during the execution of the Dialog.
     await this.conversationState.saveChanges(context, false);
     await this.userState.saveChanges(context, false);
