@@ -27,7 +27,7 @@ export class PlatformBootstrap {
     userState = new UserState(memoryStorage);
 
     // Create the main dialog.
-    const dialog = await DialogHub.getMainDialog();
+    const dialog = await DialogHub.getMainDialog(botId);
 
     // Create Bot
     const bot = new PlatformBot(conversationState, userState, dialog);

@@ -1,7 +1,9 @@
 import { ComponentDialog } from "botbuilder-dialogs";
 
-export class BaseComponentDialog extends ComponentDialog {
+export abstract class BaseComponentDialog extends ComponentDialog {
   constructor(id: string) {
     super(id);
   }
+
+  abstract getNewInstance(): any;
 }

@@ -13,10 +13,10 @@ import { QNARecognizer } from "./nlp-engines/qna.recognizer";
 export class PlatformRecognizer extends PlatformBaseRecognizer {
   private __nlpEngines: Array<PlatformBaseRecognizer>;
 
-  constructor() {
+  constructor(botId: string) {
     super();
     this.__nlpEngines = [];
-    AppContext.config.nlp.engines.forEach((nlp: any) => {
+    AppContext.config.nlp[botId].engines.forEach((nlp: any) => {
       let nlpEngine: PlatformBaseRecognizer;
       if (nlp.active) {
         switch (nlp.type) {

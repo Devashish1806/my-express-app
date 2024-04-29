@@ -23,7 +23,11 @@ import {
 } from "../core/recognizer/platform.base-recognizer";
 
 export class MainDialog extends BaseComponentDialog {
-  constructor(id: string, dialogs: [], recognizer: PlatformBaseRecognizer) {
+  constructor(
+    id: string,
+    dialogs: Array<BaseComponentDialog>,
+    recognizer: PlatformBaseRecognizer
+  ) {
     super(id);
 
     // Define the main dialog and its related components.
@@ -219,5 +223,9 @@ export class MainDialog extends BaseComponentDialog {
     //   restartMsg: "What else can I do for you?",
     // });
     return;
+  }
+
+  public getNewInstance() {
+    throw new Error("Can not create instance of root dialog");
   }
 }

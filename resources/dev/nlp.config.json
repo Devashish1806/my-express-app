@@ -1,24 +1,41 @@
 {
-  "name": "nlp",
-  "type": "single",
-  "engines": [
-    {
-      "name": "dummy",
-      "type": "dummy",
-      "active": true,
-      "appId": "",
-      "appSecret": "",
-      "host": "",
-      "path": ""
-    },
-    {
-      "name": "luis",
-      "type": "luis",
-      "active": false,
-      "appId": "",
-      "appSecret": "",
-      "host": "",
-      "path": ""
-    }
-  ]
+  "1": {
+    "name": "nlp",
+    "type": "composite",
+    "engines": [
+      {
+        "name": "dummy",
+        "type": "dummy",
+        "active": true,
+        "appId": "",
+        "appSecret": "",
+        "host": "",
+        "path": ""
+      },
+      {
+        "name": "luis",
+        "type": "luis",
+        "active": false,
+        "appId": "",
+        "appSecret": "",
+        "host": "",
+        "path": ""
+      }
+    ]
+  },
+  "2": {
+    "name": "nlp",
+    "type": "single",
+    "engines": [
+      {
+        "name": "dummy",
+        "type": "dummy",
+        "active": true,
+        "appId": "",
+        "appSecret": "",
+        "host": "",
+        "path": ""
+      }
+    ]
+  }
 }
