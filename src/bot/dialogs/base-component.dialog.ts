@@ -5,5 +5,5 @@ export abstract class BaseComponentDialog extends ComponentDialog {
     super(id);
   }
 
-  abstract getNewInstance(): any;
+  abstract getNewInstance(): BaseComponentDialog;
 }

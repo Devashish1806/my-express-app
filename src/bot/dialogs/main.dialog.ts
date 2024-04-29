@@ -225,7 +225,7 @@ export class MainDialog extends BaseComponentDialog {
     return;
   }
 
-  public getNewInstance() {
+  public getNewInstance(): MainDialog {
     throw new Error("Can not create instance of root dialog");
   }
 }
