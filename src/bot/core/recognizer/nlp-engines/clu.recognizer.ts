@@ -13,7 +13,12 @@ export class CLU extends PlatformBaseRecognizer {
     return NLP.CLU.toString();
   }
 
-  public onRecognize(context: any): Promise<IntentResult> {
-    return;
+  public async onRecognize(context: any): Promise<IntentResult> {
+    const intentResult = new IntentResult();
+    intentResult.text = context.activity.text || "";
+    intentResult.topIntent = "welcome.dialog";
+    intentResult.topScore = 90;
+    intentResult.nlp = this.getNLP();
+    return intentResult;
   }
 }

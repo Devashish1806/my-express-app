@@ -6,7 +6,7 @@ export class Banner {
     return new Promise(async (resolve, reject) => {
       figlet(appName, (err: any, data: any) => {
         if (err) {
-          Logger.log.error("Something went wrong: ", err);
+          Logger.log.error("Error in loading banner", err);
           reject(err);
         }
         console.log(data);

@@ -10,6 +10,7 @@ export abstract class PlatformBaseRecognizer {
       return intentResult;
     } catch (err) {
       Logger.log.error(`Error with the recognizer`, err);
+      throw new Error(err);
     }
   }
 

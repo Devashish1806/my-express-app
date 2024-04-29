@@ -29,9 +29,11 @@ export class PlatformRecognizer extends PlatformBaseRecognizer {
           case NLP.QNA.toLowerCase():
             nlpEngine = new QNARecognizer(nlp);
             break;
-          default:
+          case NLP.DUMMY.toLowerCase():
             nlpEngine = new DummyNlp(nlp);
             break;
+          default:
+            throw new Error(`Error in setting up the NLP: ${nlp.type}`);
         }
         this.__nlpEngines.push(nlpEngine);
       }
@@ -45,7 +47,7 @@ export class PlatformRecognizer extends PlatformBaseRecognizer {
   public async onRecognize(context: any): Promise<IntentResult> {
     const newPromiseResponses = [];
     for (let nlpEngine of this.__nlpEngines) {
-      newPromiseResponses.push(nlpEngine.onRecognize(context));
+      newPromiseResponses.push(nlpEngine.recognize(context));
     }
     const nlpResponses: Array<IntentResult> = await Promise.all(
       newPromiseResponses

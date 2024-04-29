@@ -13,9 +13,9 @@
         "path": ""
       },
       {
-        "name": "luis",
-        "type": "luis",
-        "active": false,
+        "name": "clu",
+        "type": "clu",
+        "active": true,
         "appId": "",
         "appSecret": "",
         "host": "",
