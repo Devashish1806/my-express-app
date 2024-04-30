@@ -1,0 +1,187 @@
+{
+  "0": {
+    "storage": { "memory": {}, "etag": 1 },
+    "storageKey": ["Function (anonymous)"],
+    "stateKey": "Symbol(state)",
+    "skippedProperties": {},
+    "namespace": "''"
+  },
+  "1": {
+    "storage": {
+      "memory": {
+        "emulator/conversations/4dc92cc0-072c-11ef-a401-97efdf5f893c|livechat/": {
+          "DialogState": {
+            "dialogStack": [
+              {
+                "id": "1.main.dialog",
+                "state": {
+                  "dialogs": {
+                    "dialogStack": [
+                      {
+                        "id": "mainWaterfallDialog",
+                        "state": {
+                          "options": {},
+                          "values": {
+                            "instanceId": "9968fd8c-e29e-45c5-9c03-a3499bd76d41"
+                          },
+                          "stepIndex": 0
+                        }
+                      },
+                      {
+                        "id": "TextPrompt",
+                        "state": {
+                          "options": {
+                            "prompt": {
+                              "type": "message",
+                              "text": "What can I help you with today?",
+                              "inputHint": "expectingInput",
+                              "speak": "What can I help you with today?"
+                            }
+                          },
+                          "state": {}
+                        }
+                      }
+                    ]
+                  }
+                },
+                "version": "-291765765"
+              }
+            ]
+          },
+          "eTag": "1"
+        }
+      },
+      "etag": 2
+    },
+    "storageKey": ["Function (anonymous)"],
+    "stateKey": "Symbol(state)",
+    "skippedProperties": {},
+    "namespace": "''"
+  },
+  "2": {
+    "storage": {
+      "memory": {
+        "emulator/conversations/4dc92cc0-072c-11ef-a401-97efdf5f893c|livechat/": {
+          "DialogState": {
+            "dialogStack": [
+              {
+                "id": "1.main.dialog",
+                "state": {
+                  "dialogs": {
+                    "dialogStack": [
+                      {
+                        "id": "mainWaterfallDialog",
+                        "state": {
+                          "options": {},
+                          "values": {
+                            "instanceId": "9968fd8c-e29e-45c5-9c03-a3499bd76d41"
+                          },
+                          "stepIndex": 1
+                        }
+                      },
+                      {
+                        "id": "welcome.dialog",
+                        "state": {
+                          "dialogs": {
+                            "dialogStack": [
+                              {
+                                "id": "waterfallDialog",
+                                "state": {
+                                  "options": {},
+                                  "values": {
+                                    "instanceId": "f5682a37-df92-4bad-a89b-5a16c8805df9"
+                                  },
+                                  "stepIndex": 0
+                                }
+                              },
+                              {
+                                "id": "TextPrompt",
+                                "state": {
+                                  "options": {
+                                    "prompt": {
+                                      "type": "message",
+                                      "text": "Please enter something",
+                                      "inputHint": "expectingInput",
+                                      "speak": "Please enter something"
+                                    }
+                                  },
+                                  "state": {}
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "version": "-576283029"
+                      }
+                    ]
+                  }
+                },
+                "version": "-291765765"
+              }
+            ]
+          },
+          "eTag": "2"
+        }
+      },
+      "etag": 3
+    },
+    "storageKey": ["Function (anonymous)"],
+    "stateKey": "Symbol(state)",
+    "skippedProperties": {},
+    "namespace": "''"
+  },
+  "3": {
+    "storage": {
+      "memory": {
+        "emulator/conversations/4dc92cc0-072c-11ef-a401-97efdf5f893c|livechat/": {
+          "DialogState": {
+            "dialogStack": [
+              {
+                "id": "1.main.dialog",
+                "state": {
+                  "dialogs": {
+                    "dialogStack": [
+                      {
+                        "id": "mainWaterfallDialog",
+                        "state": {
+                          "options": {
+                            "restartMsg": "What else can I do for you?"
+                          },
+                          "values": {
+                            "instanceId": "6818b3d1-0159-4f2a-aa3f-552770152778"
+                          },
+                          "stepIndex": 0
+                        }
+                      },
+                      {
+                        "id": "TextPrompt",
+                        "state": {
+                          "options": {
+                            "prompt": {
+                              "type": "message",
+                              "text": "What else can I do for you?",
+                              "inputHint": "expectingInput",
+                              "speak": "What else can I do for you?"
+                            }
+                          },
+                          "state": {}
+                        }
+                      }
+                    ]
+                  }
+                },
+                "version": "-291765765"
+              }
+            ]
+          },
+          "eTag": "3"
+        }
+      },
+      "etag": 4
+    }
+  },
+  "storageKey": ["Function (anonymous)"],
+  "stateKey": "Symbol(state)",
+  "skippedProperties": {},
+  "namespace": "''"
+}
