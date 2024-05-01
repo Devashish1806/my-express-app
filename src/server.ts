@@ -1,7 +1,6 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
-import { EnvironmentParams } from "./utils/environment-params.util";
 import { Banner } from "./utils/banner.util";
 import { Logger } from "./utils/log4js.util";
 import { AdminRouter } from "./admin/admin.router";

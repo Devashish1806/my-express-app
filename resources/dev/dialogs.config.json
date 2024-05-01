@@ -1,1 +1,8 @@
-["welcome.dialog", "dd"]
+{
+  "1": {
+    "intents": ["welcome.dialog"]
+  },
+  "2": {
+    "intents": ["welcome.dialog", "dd"]
+  }
+}

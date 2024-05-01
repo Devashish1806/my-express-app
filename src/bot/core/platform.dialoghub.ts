@@ -22,14 +22,16 @@ export class DialogHub {
   public static async getMainDialog(botId: string): Promise<MainDialog> {
     const recognizer = new PlatformRecognizer(botId);
     const dialogs: Array<BaseComponentDialog> = [];
-    const intents: Array<string> = AppContext.config.dialogs;
+    const intents: Array<string> = AppContext.config.dialogs[botId].intents;
     for (let intent in intents) {
       const dialog = DialogHub.getDialogs().get(intents[intent]);
       if (dialog) {
-        Logger.log.debug(`[DIALOG FOUND] ${intents[intent]}`);
+        Logger.log.debug(`Bot: [${botId}] [DIALOG FOUND] ${intents[intent]}`);
         dialogs.push(dialog.getNewInstance());
       } else {
-        Logger.log.warn(`[DIALOG NOT FOUND] ${intents[intent]}`);
+        Logger.log.warn(
+          `Bot: [${botId}] [DIALOG NOT FOUND] ${intents[intent]}`
+        );
       }
     }
     return new MainDialog(`${botId}.main.dialog`, dialogs, recognizer);
