@@ -13,6 +13,7 @@ import { Logger } from "../../utils/log4js.util";
 import { AppContext } from "../../app/app.context";
 import { PlatformBaseBot } from "./platfrom.base-bot";
 import { PlatfromEchoBot } from "./bots/echo.bot";
+import { PlatformLiveAgentBot } from "./bots/liveagent.bot";
 
 export class PlatformBootstrap {
   public async init(botConfig: any) {
@@ -33,20 +34,31 @@ export class PlatformBootstrap {
 
     // Create Bot
     let bot: PlatformBaseBot;
-    if (botConfig.type === "core") {
-      bot = new PlatformCoreBot(
-        botConfig.id,
-        conversationState,
-        userState,
-        dialog
-      );
-    } else {
-      bot = new PlatfromEchoBot(
-        botConfig.id,
-        conversationState,
-        userState,
-        dialog
-      );
+    switch (botConfig.type) {
+      case "core":
+        bot = new PlatformCoreBot(
+          botConfig.id,
+          conversationState,
+          userState,
+          dialog
+        );
+        break;
+      case "liveagent":
+        bot = new PlatformLiveAgentBot(
+          botConfig.id,
+          conversationState,
+          userState,
+          dialog
+        );
+        break;
+      default:
+        bot = new PlatfromEchoBot(
+          botConfig.id,
+          conversationState,
+          userState,
+          dialog
+        );
+        break;
     }
 
     // Attach adapter

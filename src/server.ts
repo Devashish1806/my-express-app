@@ -44,11 +44,11 @@ async function bootStrap() {
     const bots = AppContext.config.bot;
     for (let id in bots) {
       if (bots[id].active) {
-        Logger.log.debug(
+        Logger.log.info(
           `Bot [${id}]-[${bots[id].name}] is ACTIVE -- [INITIALIZING]`
         );
         await new PlatformBootstrap().init(bots[id]);
-        Logger.log.debug(`Bot [${id}]-[${bots[id].name}] [INITIALIZED]`);
+        Logger.log.info(`Bot [${id}]-[${bots[id].name}] [INITIALIZED]`);
       } else {
         Logger.log.warn(`Bot [${id}]-[${bots[id].name}] is INACTIVE`);
       }

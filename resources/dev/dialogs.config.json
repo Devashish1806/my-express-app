@@ -4,5 +4,8 @@
   },
   "2": {
     "intents": []
+  },
+  "3": {
+    "intents": ["liveagent.dialog"]
   }
 }

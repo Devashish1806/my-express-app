@@ -18,5 +18,15 @@
     "microsoftAppId": "",
     "microsoftAppPassword": "",
     "microsoftAppTenantId": ""
+  },
+  "3": {
+    "id": "3",
+    "name": "LiveAgent Bot",
+    "active": true,
+    "type": "liveagent",
+    "microsoftAppType": "",
+    "microsoftAppId": "",
+    "microsoftAppPassword": "",
+    "microsoftAppTenantId": ""
   }
 }
