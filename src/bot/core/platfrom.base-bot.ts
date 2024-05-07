@@ -4,6 +4,7 @@ import {
   ConversationState,
   MessageFactory,
   StatePropertyAccessor,
+  TurnContext,
   UserState,
 } from "botbuilder";
 import { Dialog, DialogState } from "botbuilder-dialogs";
@@ -11,7 +12,7 @@ import { MainDialog } from "../dialogs/main.dialog";
 import { PlatformAdapter } from "./platform.adapter";
 import { Logger } from "../../utils/log4js.util";
 
-export class PlatformBaseBot extends ActivityHandler {
+export abstract class PlatformBaseBot extends ActivityHandler {
   private conversationState: BotState;
   private userState: BotState;
   private dialog: Dialog;
@@ -19,6 +20,12 @@ export class PlatformBaseBot extends ActivityHandler {
   private __adapter: PlatformAdapter;
   private __botId: string;
   private __botName: string;
+  private __messageHandler: (
+    context: TurnContext,
+    dialog: Dialog,
+    dialogState: StatePropertyAccessor<DialogState>
+  ) => Promise<void>;
+  private __membersAddedHandler: (context: TurnContext) => Promise<void>;
 
   /**
    *
@@ -33,6 +40,7 @@ export class PlatformBaseBot extends ActivityHandler {
     dialog: Dialog
   ) {
     super();
+    // setting up default base functionality
     if (!conversationState) {
       throw new Error(
         "[DialogBot]: Missing parameter. conversationState is required"
@@ -44,6 +52,29 @@ export class PlatformBaseBot extends ActivityHandler {
     if (!dialog) {
       throw new Error("[DialogBot]: Missing parameter. dialog is required");
     }
+    if (!this.onMessageHandler) {
+      this.onMessageHandler = async (context, dialog, dialogState) => {
+        Logger.log.debug(
+          `Running bot [${botId}] dialog with Message Activity.`
+        );
+        // Run the Dialog with the new message Activity.
+        await (dialog as MainDialog).run(context, dialogState);
+      };
+    }
+    if (!this.onMembersAddedHandler) {
+      this.onMembersAddedHandler = async (context) => {
+        const membersAdded = context.activity.membersAdded;
+        const welcomeText = "Hello from PLATFROM BASE BOT\n\nWelcome!";
+        for (const member of membersAdded) {
+          if (member.id !== context.activity.recipient.id) {
+            await context.sendActivity(
+              MessageFactory.text(welcomeText, welcomeText)
+            );
+          }
+        }
+      };
+    }
+    // default functionality completed
 
     this.conversationState = conversationState as ConversationState;
     this.userState = userState as UserState;
@@ -52,11 +83,13 @@ export class PlatformBaseBot extends ActivityHandler {
       this.conversationState.createProperty<DialogState>("DialogState");
 
     this.onMessage(async (context, next) => {
-      Logger.log.debug(`Running bot [${botId}] dialog with Message Activity.`);
+      await this.onMessageHandler(context, this.dialog, this.dialogState);
+      // By calling next() you ensure that the next BotHandler is run.
+      await next();
+    });
 
-      // Run the Dialog with the new message Activity.
-      await (this.dialog as MainDialog).run(context, this.dialogState);
-
+    this.onMembersAdded(async (context, next) => {
+      await this.onMembersAddedHandler(context);
       // By calling next() you ensure that the next BotHandler is run.
       await next();
     });
@@ -130,5 +163,39 @@ export class PlatformBaseBot extends ActivityHandler {
    */
   get botName(): string {
     return this.__botName;
+  }
+
+  /**
+   * set on message handler
+   */
+  set onMessageHandler(
+    handler: (
+      context: TurnContext,
+      dialog: Dialog,
+      dialogState: StatePropertyAccessor<DialogState>
+    ) => Promise<void>
+  ) {
+    this.__messageHandler = handler;
+  }
+
+  /**
+   * get on message handler
+   */
+  get onMessageHandler() {
+    return this.__messageHandler;
+  }
+
+  /**
+   * set on message handler
+   */
+  set onMembersAddedHandler(handler: (context: TurnContext) => Promise<void>) {
+    this.__membersAddedHandler = handler;
+  }
+
+  /**
+   * get on message handler
+   */
+  get onMembersAddedHandler() {
+    return this.__membersAddedHandler;
   }
 }

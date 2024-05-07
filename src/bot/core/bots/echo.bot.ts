@@ -1,5 +1,10 @@
-import { BotState, MessageFactory } from "botbuilder";
-import { Dialog } from "botbuilder-dialogs";
+import {
+  BotState,
+  MessageFactory,
+  StatePropertyAccessor,
+  TurnContext,
+} from "botbuilder";
+import { Dialog, DialogState } from "botbuilder-dialogs";
 import { PlatformBaseBot } from "../platfrom.base-bot";
 
 export class PlatfromEchoBot extends PlatformBaseBot {
@@ -16,19 +21,28 @@ export class PlatfromEchoBot extends PlatformBaseBot {
     dialog: Dialog
   ) {
     super(botId, conversationState, userState, dialog);
+    super.onMessageHandler = this.messageHandler;
+    super.onMembersAddedHandler = this.membersAddedHandler;
+  }
 
-    this.onMembersAdded(async (context, next) => {
-      const membersAdded = context.activity.membersAdded;
-      const welcomeText = "Hello from PLATFROM ECHO BOT\n\nwelcome!";
-      for (const member of membersAdded) {
-        if (member.id !== context.activity.recipient.id) {
-          await context.sendActivity(
-            MessageFactory.text(welcomeText, welcomeText)
-          );
-        }
+  async messageHandler(
+    context: TurnContext,
+    dialog: Dialog,
+    dialogState: StatePropertyAccessor<DialogState>
+  ) {
+    const replyText = `Echo: ${context.activity.text}`;
+    await context.sendActivity(MessageFactory.text(replyText, replyText));
+  }
+
+  async membersAddedHandler(context: TurnContext) {
+    const membersAdded = context.activity.membersAdded;
+    const welcomeText = "Hello from PLATFROM ECHO BOT\n\nWelcome!";
+    for (const member of membersAdded) {
+      if (member.id !== context.activity.recipient.id) {
+        await context.sendActivity(
+          MessageFactory.text(welcomeText, welcomeText)
+        );
       }
-      // By calling next() you ensure that the next BotHandler is run.
-      await next();
-    });
+    }
   }
 }

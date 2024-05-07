@@ -16,19 +16,5 @@ export class PlatformCoreBot extends PlatformBaseBot {
     dialog: Dialog
   ) {
     super(botId, conversationState, userState, dialog);
-
-    this.onMembersAdded(async (context, next) => {
-      const membersAdded = context.activity.membersAdded;
-      const welcomeText = "Hello from PLATFROM CORE BOT\n\nwelcome!";
-      for (const member of membersAdded) {
-        if (member.id !== context.activity.recipient.id) {
-          await context.sendActivity(
-            MessageFactory.text(welcomeText, welcomeText)
-          );
-        }
-      }
-      // By calling next() you ensure that the next BotHandler is run.
-      await next();
-    });
   }
 }
