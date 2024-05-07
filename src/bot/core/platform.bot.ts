@@ -2,6 +2,7 @@ import {
   ActivityHandler,
   BotState,
   ConversationState,
+  MessageFactory,
   StatePropertyAccessor,
   UserState,
 } from "botbuilder";
@@ -17,6 +18,7 @@ export class PlatformBot extends ActivityHandler {
   private dialogState: StatePropertyAccessor<DialogState>;
   private __adapter: PlatformAdapter;
   private __botId: string;
+  private __botName: string;
 
   /**
    *
@@ -25,6 +27,7 @@ export class PlatformBot extends ActivityHandler {
    * @param {Dialog} dialog
    */
   constructor(
+    botId: string,
     conversationState: BotState,
     userState: BotState,
     dialog: Dialog
@@ -49,11 +52,25 @@ export class PlatformBot extends ActivityHandler {
       this.conversationState.createProperty<DialogState>("DialogState");
 
     this.onMessage(async (context, next) => {
-      Logger.log.debug("Running dialog with Message Activity.");
+      Logger.log.debug(`Running bot [${botId}] dialog with Message Activity.`);
 
       // Run the Dialog with the new message Activity.
       await (this.dialog as MainDialog).run(context, this.dialogState);
 
+      // By calling next() you ensure that the next BotHandler is run.
+      await next();
+    });
+
+    this.onMembersAdded(async (context, next) => {
+      const membersAdded = context.activity.membersAdded;
+      const welcomeText = "Hello and welcome!";
+      for (const member of membersAdded) {
+        if (member.id !== context.activity.recipient.id) {
+          await context.sendActivity(
+            MessageFactory.text(welcomeText, welcomeText)
+          );
+        }
+      }
       // By calling next() you ensure that the next BotHandler is run.
       await next();
     });
@@ -102,16 +119,30 @@ export class PlatformBot extends ActivityHandler {
   }
 
   /**
-   * set adapter
+   * set botId
    */
   set botId(botId: string) {
     this.__botId = botId;
   }
 
   /**
-   * get adapter
+   * get botId
    */
   get botId(): string {
     return this.__botId;
+  }
+
+  /**
+   * set botName
+   */
+  set botName(botId: string) {
+    this.__botName = botId;
+  }
+
+  /**
+   * get botId
+   */
+  get botName(): string {
+    return this.__botName;
   }
 }

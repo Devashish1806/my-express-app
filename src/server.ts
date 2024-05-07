@@ -40,8 +40,19 @@ async function bootStrap() {
       app.use(module[1].getBasePath(), module[1].getRouter());
     }
 
-    // initiate platform bot
-    await new PlatformBootstrap().init("1");
+    // initiate platform bots
+    const bots = AppContext.config.bot;
+    for (let id in bots) {
+      if (bots[id].active) {
+        Logger.log.debug(
+          `Bot [${id}]-[${bots[id].name}] is ACTIVE -- [INITIALIZING]`
+        );
+        await new PlatformBootstrap().init(bots[id]);
+        Logger.log.debug(`Bot [${id}]-[${bots[id].name}] [INITIALIZED]`);
+      } else {
+        Logger.log.warn(`Bot [${id}]-[${bots[id].name}] is INACTIVE`);
+      }
+    }
 
     // start the server
     app.listen(appConfig.Port, () => {

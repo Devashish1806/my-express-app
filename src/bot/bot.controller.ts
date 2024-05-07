@@ -5,13 +5,19 @@ import { PlatformCache } from "./core/platform.cache";
 
 export class BotController {
   public static async listen(req: Request, res: Response) {
-    // need to handle the bot listen event
-    Logger.log.debug("Bot message action event triggered ");
+    // bot listen event
     const platformBot: PlatformBot = PlatformCache.getInstance().getBot(
       req.params.id
     );
-    await platformBot.adapter.processMessageActivity(req, res, (context) =>
-      platformBot.run(context)
-    );
+    if (PlatformBot) {
+      Logger.log.debug(
+        `Bot [${platformBot.botId}] message action event triggered`
+      );
+      await platformBot.adapter.processMessageActivity(req, res, (context) =>
+        platformBot.run(context)
+      );
+    } else {
+      throw new Error(`Bot [${req.params.id}] [NOT FOUND]`);
+    }
   }
 }

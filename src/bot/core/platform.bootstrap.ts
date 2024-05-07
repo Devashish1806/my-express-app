@@ -13,7 +13,7 @@ import { Logger } from "../../utils/log4js.util";
 import { AppContext } from "../../app/app.context";
 
 export class PlatformBootstrap {
-  public async init(botId: string) {
+  public async init(botConfig: any) {
     // Define a state store for your bot. See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
     // A bot requires a state store to persist the dialog and user state between messages.
     let conversationState: ConversationState;
@@ -27,21 +27,26 @@ export class PlatformBootstrap {
     userState = new UserState(memoryStorage);
 
     // Create the main dialog.
-    const dialog = await DialogHub.getMainDialog(botId);
+    const dialog = await DialogHub.getMainDialog(botConfig.id);
 
     // Create Bot
-    const bot = new PlatformBot(conversationState, userState, dialog);
+    const bot = new PlatformBot(
+      botConfig.id,
+      conversationState,
+      userState,
+      dialog
+    );
 
     // Attach adapter
-    bot.adapter = this.createPlatformAdapter(botId);
+    bot.adapter = this.createPlatformAdapter(botConfig.id);
 
-    // Attach botId
-    bot.botId = botId;
-
+    // Attach botId & name
+    bot.botId = botConfig.id;
+    bot.botName = botConfig.name;
     // add bot to platform cache
     PlatformCache.getInstance().addBot(bot);
 
-    Logger.log.debug(`Bot: [${botId}] setup completed`);
+    Logger.log.debug(`Bot: [${botConfig.id}] setup completed`);
   }
 
   private createPlatformAdapter(botId: string): PlatformAdapter {

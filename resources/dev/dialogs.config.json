@@ -3,6 +3,6 @@
     "intents": ["welcome.dialog"]
   },
   "2": {
-    "intents": ["welcome.dialog", "dd"]
+    "intents": []
   }
 }

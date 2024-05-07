@@ -16,7 +16,31 @@ export class PlatformRecognizer extends PlatformBaseRecognizer {
   constructor(botId: string) {
     super();
     this.__nlpEngines = [];
-    AppContext.config.nlp[botId].engines.forEach((nlp: any) => {
+    if (AppContext.config.nlp[botId].type === "multiple") {
+      AppContext.config.nlp[botId].engines.forEach((nlp: any) => {
+        let nlpEngine: PlatformBaseRecognizer;
+        if (nlp.active) {
+          switch (nlp.type) {
+            case NLP.CLU.toLowerCase():
+              nlpEngine = new CLU(nlp);
+              break;
+            case NLP.CUSTOM.toLowerCase():
+              nlpEngine = new CustomRecognizer(nlp);
+              break;
+            case NLP.QNA.toLowerCase():
+              nlpEngine = new QNARecognizer(nlp);
+              break;
+            case NLP.DUMMY.toLowerCase():
+              nlpEngine = new DummyNlp(nlp);
+              break;
+            default:
+              throw new Error(`Error in setting up the NLP: ${nlp.type}`);
+          }
+          this.__nlpEngines.push(nlpEngine);
+        }
+      });
+    } else {
+      const nlp = AppContext.config.nlp[botId].engines;
       let nlpEngine: PlatformBaseRecognizer;
       if (nlp.active) {
         switch (nlp.type) {
@@ -36,8 +60,10 @@ export class PlatformRecognizer extends PlatformBaseRecognizer {
             throw new Error(`Error in setting up the NLP: ${nlp.type}`);
         }
         this.__nlpEngines.push(nlpEngine);
+      } else {
+        throw new Error(`Error in setting up the NLP: ${nlp.type} [INACTIVE]`);
       }
-    });
+    }
   }
 
   public getNLP(): string {

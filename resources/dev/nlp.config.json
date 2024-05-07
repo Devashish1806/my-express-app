@@ -1,7 +1,7 @@
 {
   "1": {
     "name": "nlp",
-    "type": "composite",
+    "type": "multiple",
     "engines": [
       {
         "name": "dummy",
@@ -26,16 +26,14 @@
   "2": {
     "name": "nlp",
     "type": "single",
-    "engines": [
-      {
-        "name": "dummy",
-        "type": "dummy",
-        "active": true,
-        "appId": "",
-        "appSecret": "",
-        "host": "",
-        "path": ""
-      }
-    ]
+    "engines": {
+      "name": "dummy",
+      "type": "dummy",
+      "active": true,
+      "appId": "",
+      "appSecret": "",
+      "host": "",
+      "path": ""
+    }
   }
 }
