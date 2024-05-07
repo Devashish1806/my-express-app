@@ -1,0 +1,22 @@
+{
+  "1": {
+    "id": "1",
+    "name": "Core Bot",
+    "active": true,
+    "type": "core",
+    "microsoftAppType": "",
+    "microsoftAppId": "",
+    "microsoftAppPassword": "",
+    "microsoftAppTenantId": ""
+  },
+  "2": {
+    "id": "2",
+    "name": "Echo Bot",
+    "active": true,
+    "type": "echo",
+    "microsoftAppType": "",
+    "microsoftAppId": "",
+    "microsoftAppPassword": "",
+    "microsoftAppTenantId": ""
+  }
+}
