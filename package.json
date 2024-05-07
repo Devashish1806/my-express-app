@@ -12,6 +12,7 @@
   "dependencies": {
     "@microsoft/recognizers-text-data-types-timex-expression": "1.1.4",
     "@types/node": "^20.12.7",
+    "axios": "^1.6.8",
     "body-parser": "^1.20.2",
     "botbuilder": "^4.22.2",
     "botbuilder-ai": "~4.13.4",
