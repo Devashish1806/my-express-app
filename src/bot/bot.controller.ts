@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { Logger } from "../utils/log4js.util";
-import { PlatformBot } from "./core/platform.bot";
 import { PlatformCache } from "./core/platform.cache";
+import { PlatformBaseBot } from "./core/platfrom.base-bot";
 
 export class BotController {
   public static async listen(req: Request, res: Response) {
     // bot listen event
-    const platformBot: PlatformBot = PlatformCache.getInstance().getBot(
+    const platformBot: PlatformBaseBot = PlatformCache.getInstance().getBot(
       req.params.id
     );
-    if (PlatformBot) {
+    if (platformBot) {
       Logger.log.debug(
         `Bot [${platformBot.botId}] message action event triggered`
       );
@@ -17,7 +17,9 @@ export class BotController {
         platformBot.run(context)
       );
     } else {
-      throw new Error(`Bot [${req.params.id}] [NOT FOUND]`);
+      let msg = `Bot [${req.params.id}] [NOT FOUND]`;
+      res.status(404).send(msg);
+      Logger.log.warn(msg);
     }
   }
 }

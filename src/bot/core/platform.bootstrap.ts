@@ -6,11 +6,13 @@ import {
   UserState,
 } from "botbuilder";
 import { PlatformAdapter } from "./platform.adapter";
-import { PlatformBot } from "./platform.bot";
+import { PlatformCoreBot } from "./bots/core.bot";
 import { DialogHub } from "./platform.dialoghub";
 import { PlatformCache } from "./platform.cache";
 import { Logger } from "../../utils/log4js.util";
 import { AppContext } from "../../app/app.context";
+import { PlatformBaseBot } from "./platfrom.base-bot";
+import { PlatfromEchoBot } from "./bots/echo.bot";
 
 export class PlatformBootstrap {
   public async init(botConfig: any) {
@@ -30,12 +32,22 @@ export class PlatformBootstrap {
     const dialog = await DialogHub.getMainDialog(botConfig.id);
 
     // Create Bot
-    const bot = new PlatformBot(
-      botConfig.id,
-      conversationState,
-      userState,
-      dialog
-    );
+    let bot: PlatformBaseBot;
+    if (botConfig.type === "core") {
+      bot = new PlatformCoreBot(
+        botConfig.id,
+        conversationState,
+        userState,
+        dialog
+      );
+    } else {
+      bot = new PlatfromEchoBot(
+        botConfig.id,
+        conversationState,
+        userState,
+        dialog
+      );
+    }
 
     // Attach adapter
     bot.adapter = this.createPlatformAdapter(botConfig.id);

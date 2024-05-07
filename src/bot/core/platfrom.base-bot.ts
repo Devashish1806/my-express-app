@@ -11,7 +11,7 @@ import { MainDialog } from "../dialogs/main.dialog";
 import { PlatformAdapter } from "./platform.adapter";
 import { Logger } from "../../utils/log4js.util";
 
-export class PlatformBot extends ActivityHandler {
+export class PlatformBaseBot extends ActivityHandler {
   private conversationState: BotState;
   private userState: BotState;
   private dialog: Dialog;
@@ -57,20 +57,6 @@ export class PlatformBot extends ActivityHandler {
       // Run the Dialog with the new message Activity.
       await (this.dialog as MainDialog).run(context, this.dialogState);
 
-      // By calling next() you ensure that the next BotHandler is run.
-      await next();
-    });
-
-    this.onMembersAdded(async (context, next) => {
-      const membersAdded = context.activity.membersAdded;
-      const welcomeText = "Hello and welcome!";
-      for (const member of membersAdded) {
-        if (member.id !== context.activity.recipient.id) {
-          await context.sendActivity(
-            MessageFactory.text(welcomeText, welcomeText)
-          );
-        }
-      }
       // By calling next() you ensure that the next BotHandler is run.
       await next();
     });

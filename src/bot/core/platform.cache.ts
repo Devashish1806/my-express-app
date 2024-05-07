@@ -1,12 +1,12 @@
 import { Logger } from "../../utils/log4js.util";
-import { PlatformBot } from "./platform.bot";
+import { PlatformBaseBot } from "./platfrom.base-bot";
 
 export class PlatformCache {
   private static __instance: PlatformCache = null;
-  private botCache: Map<string, PlatformBot>;
+  private botCache: Map<string, PlatformBaseBot>;
 
   constructor() {
-    this.botCache = new Map<string, PlatformBot>();
+    this.botCache = new Map<string, PlatformBaseBot>();
   }
 
   public static getInstance(): PlatformCache {
@@ -16,7 +16,7 @@ export class PlatformCache {
     return PlatformCache.__instance;
   }
 
-  public addBot(bot: PlatformBot) {
+  public addBot(bot: PlatformBaseBot) {
     this.botCache.set(bot.botId, bot);
     Logger.log.debug(
       `Bot [${bot.botId}] added to the platform cache successfully`
