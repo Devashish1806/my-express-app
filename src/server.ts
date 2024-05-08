@@ -9,6 +9,7 @@ import { BaseRouter } from "./utils/web/base.router";
 import { BotRouter } from "./bot/bot.router";
 import { PlatformBootstrap } from "./bot/core/platform.bootstrap";
 import { AppContext } from "./app/app.context";
+import { Job } from "./jobs/job.scheduler";
 
 async function bootStrap() {
   try {
@@ -53,6 +54,9 @@ async function bootStrap() {
         Logger.log.warn(`Bot [${id}]-[${bots[id].name}] is INACTIVE`);
       }
     }
+
+    // starting Job services
+    if (AppContext.config.application.Job) Job.start();
 
     // start the server
     app.listen(appConfig.Port, () => {
