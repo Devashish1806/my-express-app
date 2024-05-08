@@ -40,8 +40,8 @@
     "name": "nlp",
     "type": "single",
     "engines": {
-      "name": "dummy",
-      "type": "dummy",
+      "name": "custom",
+      "type": "custom",
       "active": true,
       "appId": "",
       "appSecret": "",

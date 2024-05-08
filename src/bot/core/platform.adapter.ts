@@ -3,9 +3,11 @@ import {
   ConfigurationBotFrameworkAuthentication,
   Request,
   Response,
+  TranscriptLoggerMiddleware,
   TurnContext,
 } from "botbuilder";
 import { Logger } from "../../utils/log4js.util";
+import { PlatfromTranscriptLogger } from "./platform.transcript-logger";
 
 export class PlatformAdapter extends CloudAdapter {
   constructor(
@@ -13,6 +15,7 @@ export class PlatformAdapter extends CloudAdapter {
   ) {
     super(botFrameworkAuthentication);
     super.onTurnError = this.onTurnErrorHandler;
+    super.use(new TranscriptLoggerMiddleware(new PlatfromTranscriptLogger()));
   }
 
   private preProcessActivity() {

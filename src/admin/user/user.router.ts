@@ -1,6 +1,4 @@
-import { Logger } from "../../utils/log4js.util";
 import { Router, Request, Response } from "express";
-import { AdminController } from "../admin.controller";
 import { UserController } from "./user.controller";
 
 export class UserRouter {

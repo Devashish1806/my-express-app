@@ -6,6 +6,6 @@
     "intents": []
   },
   "3": {
-    "intents": ["liveagent.dialog"]
+    "intents": ["welcome.dialog", "liveagent.dialog"]
   }
 }

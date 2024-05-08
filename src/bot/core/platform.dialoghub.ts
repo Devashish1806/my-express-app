@@ -1,6 +1,7 @@
 import { AppContext } from "../../app/app.context";
 import { Logger } from "../../utils/log4js.util";
 import { BaseComponentDialog } from "../dialogs/base-component.dialog";
+import { LiveagentDialog } from "../dialogs/componentDialogs/liveagent.dialog";
 import { WelcomeDialog } from "../dialogs/componentDialogs/welcome.dialog";
 import { MainDialog } from "../dialogs/main.dialog";
 import { PlatformRecognizer } from "./recognizer/platform.recognizer";
@@ -14,6 +15,10 @@ export class DialogHub {
       DialogHub.__dialogCache.set(
         "welcome.dialog",
         new WelcomeDialog("welcome.dialog")
+      );
+      DialogHub.__dialogCache.set(
+        "liveagent.dialog",
+        new LiveagentDialog("liveagent.dialog")
       );
     }
     return DialogHub.__dialogCache;

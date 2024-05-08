@@ -13,7 +13,17 @@ export class CustomRecognizer extends PlatformBaseRecognizer {
     return NLP.CUSTOM.toString();
   }
 
-  public onRecognize(context: any): Promise<IntentResult> {
-    return;
+  public async onRecognize(context: any): Promise<IntentResult> {
+    const utterance = this.getUtterance(context);
+    const intentResult = new IntentResult();
+    intentResult.text = utterance;
+    if (utterance.toLowerCase().includes("liveagent")) {
+      intentResult.topIntent = "liveagent.dialog";
+    } else {
+      intentResult.topIntent = "welcome.dialog";
+    }
+    intentResult.topScore = 90;
+    intentResult.nlp = this.getNLP();
+    return intentResult;
   }
 }

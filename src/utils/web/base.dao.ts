@@ -15,31 +15,27 @@ export abstract class BaseDao {
       BaseDao.dbConnection = client.db("test");
       return BaseDao.dbConnection;
     } catch (error) {
-      Logger.log.error(`Fetching records failed! `, error);
+      Logger.log.error(`Error while establishing DB connection`, error);
       return error;
     }
   }
 
   public async findAll(): Promise<any> {
-    Logger.log.debug(`Find All: [${this.collection}]`);
     let db = await BaseDao.getDBConnection();
     try {
       let result = await db.collection(this.collection).find().toArray();
       return result;
     } catch (error) {
-      Logger.log.error(`Fetching records failed! `, error);
       return error;
     }
   }
 
   public async add(payload: any): Promise<any> {
-    Logger.log.debug(`Add: [${this.collection}]`);
     let db = await BaseDao.getDBConnection();
     try {
       let result = await db.collection(this.collection).insertOne(payload);
       return result;
     } catch (error) {
-      Logger.log.error(`Adding records failed! `, error);
       return error;
     }
   }
