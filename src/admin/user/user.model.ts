@@ -1,4 +1,7 @@
 export interface UserSchema {
-  name: String;
+  name: string;
   date: Date;
+  pass: string;
+  mail: string;
+  mobile: number;
 }

@@ -1,5 +1,6 @@
 import { MongoClient, Db } from "mongodb";
 import { Logger } from "../log4js.util";
+import { AppContext } from "../../app/app.context";
 
 export abstract class BaseDao {
   private static dbConnection: Db;
@@ -12,7 +13,7 @@ export abstract class BaseDao {
     let client: MongoClient;
     try {
       client = await MongoClient.connect("mongodb://localhost:27017");
-      BaseDao.dbConnection = client.db("test");
+      BaseDao.dbConnection = client.db(AppContext.config.application.db);
       return BaseDao.dbConnection;
     } catch (error) {
       Logger.log.error(`Error while establishing DB connection`, error);

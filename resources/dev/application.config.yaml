@@ -1,4 +1,5 @@
-Name: MY APP SERVER
-Port: 3000
-Environment: DEV
-Job: false
+name: MY APP SERVER
+port: 3000
+environment: DEV
+job: false
+db: my-app
