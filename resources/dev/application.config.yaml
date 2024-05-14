@@ -1,5 +1,5 @@
 name: MY APP SERVER
-port: 3000
+port: 8080
 environment: DEV
 job: false
 db: my-app
