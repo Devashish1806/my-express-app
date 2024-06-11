@@ -17,7 +17,7 @@ export class DummyController {
   }
 
   public async getData(req: Request, res: Response): Promise<any> {
-    this.__dao.getData().then((result) => {
+    this.__dao.getData(req.query).then((result) => {
       res.send(result);
     });
   }

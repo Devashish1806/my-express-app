@@ -1,4 +1,4 @@
-import { MongoClient, Db } from "mongodb";
+import { MongoClient, Db, Document } from "mongodb";
 import { Logger } from "../log4js.util";
 import { AppContext } from "../../app/app.context";
 
@@ -25,6 +25,19 @@ export abstract class BaseDao {
     let db = await BaseDao.getDBConnection();
     try {
       let result = await db.collection(this.collection).find().toArray();
+      return result;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  public async aggregate(pipeline: Array<Document>): Promise<any> {
+    let db = await BaseDao.getDBConnection();
+    try {
+      let result = await db
+        .collection(this.collection)
+        .aggregate(pipeline)
+        .toArray();
       return result;
     } catch (error) {
       return error;
