@@ -7,7 +7,8 @@ import {
   TurnContext,
 } from "botbuilder";
 import { Logger } from "../../utils/log4js.util";
-import { PlatfromTranscriptLogger } from "./platform.transcript-logger";
+import { PlatformTranscriptLoggerMiddleware } from "./middlewares/platform-transcript-logger.middleware";
+import { GenesysMiddleware } from "./middlewares/genesys.middleware";
 
 export class PlatformAdapter extends CloudAdapter {
   constructor(
@@ -15,7 +16,10 @@ export class PlatformAdapter extends CloudAdapter {
   ) {
     super(botFrameworkAuthentication);
     super.onTurnError = this.onTurnErrorHandler;
-    super.use(new TranscriptLoggerMiddleware(new PlatfromTranscriptLogger()));
+    super.use(
+      new TranscriptLoggerMiddleware(new PlatformTranscriptLoggerMiddleware())
+    );
+    // super.use(new GenesysMiddleware());
   }
 
   private preProcessActivity() {

@@ -14,9 +14,9 @@ import {
   TextFormatTypes,
   TranscriptLogger,
 } from "botbuilder";
-import { ChatTranscriptDao } from "../../admin/chat-transcript/chat-transcript.dao";
+import { ChatTranscriptDao } from "../../../admin/chat-transcript/chat-transcript.dao";
 
-export class PlatfromTranscriptLogger implements TranscriptLogger {
+export class PlatformTranscriptLoggerMiddleware implements TranscriptLogger {
   logActivity(activity: Activity): void | Promise<void> {
     const log = this.logObject(activity);
     ChatTranscriptDao.getInstance().addLog(log);
