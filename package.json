@@ -17,6 +17,7 @@
     "botbuilder": "^4.22.2",
     "botbuilder-ai": "~4.13.4",
     "botbuilder-dialogs": "~4.13.4",
+    "botbuilder-lg": "^4.22.3",
     "botbuilder-testing": "~4.13.4",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",

@@ -1,0 +1,12 @@
+> -------------Main Dialog------------------
+# main.dialog.greeting.hi
+- Hola ${name}, ¿cómo estás?
+- Hola ${name}, Espero que estés bien, ¿cómo puedo ayudarte hoy?
+- Hola ${name}, ¿En qué puedo ayudarte hoy?
+
+# main.dialog.sorry.intent
+- Lo sentimos, no puedo encontrar el cuadro de diálogo: ${intent}
+
+# main.dialog.restart.msg
+- ¿Qué más puedo hacer por ti?
+- ¿Algo más que pueda hacer por ti?

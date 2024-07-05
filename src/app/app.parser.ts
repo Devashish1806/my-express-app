@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import * as yaml from "js-yaml";
 import { existsSync, readFileSync, statSync } from "fs";
 import { Logger } from "../utils/log4js.util";
+import { Templates } from "botbuilder-lg";
 
 export class AppParser {
   private static __instance: AppParser = null;
@@ -11,6 +12,7 @@ export class AppParser {
   // private __baseModulePath: string = null;
   private __config: any = {};
   private __environment: string = null;
+  private __languageTemplate: Map<string, Templates> = null;
   // private __moduleMap: Map<string, any> = null;
 
   private constructor() {
@@ -22,6 +24,7 @@ export class AppParser {
     );
     // this.__baseModulePath = join(process.cwd(), "dist", "modules");
     // this.__moduleMap = new Map<string, any>();
+    this.__languageTemplate = new Map<string, Templates>();
     this.__parseApplicationConfig(this.__baseResourcePath);
     // this.__loadModules();
   }
@@ -38,6 +41,10 @@ export class AppParser {
     return this.__config;
   }
 
+  get languageTemplate() {
+    return this.__languageTemplate;
+  }
+
   private __parseEnvironment(): string {
     let env: string = "dev";
     process.argv.forEach((value, index) => {
@@ -52,12 +59,14 @@ export class AppParser {
     return env;
   }
 
-  private __parseApplicationConfig(resourceFolder: string) {
-    this.__parseConfig(resourceFolder);
+  private async __parseApplicationConfig(resourceFolder: string) {
+    await this.__parseConfig(resourceFolder);
+    // Load LG template files
+    await this.__parseLanguageTemplates(resourceFolder);
     // this.__parseModules();
   }
 
-  private __parseConfig(resourceFolder: string) {
+  private async __parseConfig(resourceFolder: string) {
     const configFiles: string[] = readdirSync(resourceFolder).filter((file) => {
       return file.match(
         new RegExp(`(\\w+\\.(?:config\\.(yaml|yml|json)))`, "gi")
@@ -79,6 +88,25 @@ export class AppParser {
     if (file.endsWith("yml") || file.endsWith("yaml"))
       return yaml.load(readFileSync(file, "utf-8"));
     else return readJSONSync(file);
+  }
+
+  private async __parseLanguageTemplates(path: string) {
+    try {
+      const lgPath = join(path, "lg");
+      const lgTemplates: string[] = readdirSync(lgPath).filter((file) =>
+        file.match(new RegExp(`(\\w+\\.(lg))`, "i"))
+      );
+      lgTemplates.map((templateFile) => {
+        const templatePath = join(lgPath, templateFile);
+        if (existsSync(`${templatePath}`)) {
+          const template = templateFile.split(".")[0].toLowerCase();
+          let templates: Templates = Templates.parseFile(templatePath);
+          this.__languageTemplate.set(template, templates);
+        }
+      });
+    } catch (err) {
+      Logger.log.error(`Error parsing templates`, err);
+    }
   }
 
   /**

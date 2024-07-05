@@ -55,7 +55,9 @@ export class MainDialog extends BaseComponentDialog {
   ): Promise<DialogTurnResult> {
     const messageText = (stepContext.options as any).restartMsg
       ? (stepContext.options as any).restartMsg
-      : `What can I help you with today?`;
+      : this.template
+          .get("en")
+          .evaluate("main.dialog.greeting.hi", { name: "Devashish" });
     const promptMessage = MessageFactory.text(
       messageText,
       messageText,
@@ -82,7 +84,11 @@ export class MainDialog extends BaseComponentDialog {
         // Run the BookingDialog passing in whatever details we have from the LUIS call, it will fill out the remainder.
         return await stepContext.beginDialog(dialog.id);
       } else {
-        const messageText = `Sorry, not able to find the dialog [${intentResult.topIntent}]`;
+        const messageText = this.template
+          .get("en")
+          .evaluate("main.dialog.sorry.intent", {
+            intent: intentResult.topIntent,
+          });
         await stepContext.context.sendActivity(
           messageText,
           messageText,
@@ -104,7 +110,7 @@ export class MainDialog extends BaseComponentDialog {
   ): Promise<DialogTurnResult> {
     // Restart the main dialog waterfall with a different message the second time around
     return await stepContext.replaceDialog(this.initialDialogId, {
-      restartMsg: "What else can I do for you?",
+      restartMsg: this.template.get("en").evaluate("main.dialog.restart.msg"),
     });
   }
 

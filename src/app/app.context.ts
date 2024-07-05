@@ -3,10 +3,10 @@ import { AppParser } from "./app.parser";
 
 export class AppContext {
   private static __instance: AppContext = null;
-  private __config: any = null;
+  private __parserInstance: any = null;
 
   private constructor() {
-    this.__config = AppParser.getInstance().config;
+    this.__parserInstance = AppParser.getInstance();
   }
 
   static getInstance(): AppContext {
@@ -18,10 +18,14 @@ export class AppContext {
   }
 
   static get config() {
-    return this.getInstance().__config;
+    return this.getInstance().__parserInstance.config;
+  }
+
+  static get languageTemplate() {
+    return this.getInstance().__parserInstance.languageTemplate;
   }
 
   static get modules() {
-    return this.getInstance().__config.modules;
+    return this.getInstance().__parserInstance.config.modules;
   }
 }
