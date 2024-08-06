@@ -1,0 +1,1 @@
+{"version":3,"file":"log4js.util.js","sourceRoot":"","sources":["../../src/utils/log4js.util.ts"],"names":[],"mappings":";;;AAAA,mCAA8C;AAC9C,oDAAgD;AAEhD,MAAa,MAAM;IACT,MAAM,CAAC,YAAY;QACzB,MAAM,MAAM,GAAG,IAAA,kBAAS,GAAE,CAAC;QAC3B,IAAA,kBAAS,EAAC,wBAAU,CAAC,MAAM,CAAC,MAAM,CAAC,CAAC;QACpC,OAAO,MAAM,CAAC;IAChB,CAAC;;AALH,wBAQC;AADe,UAAG,GAAG,MAAM,CAAC,YAAY,EAAE,CAAC"}

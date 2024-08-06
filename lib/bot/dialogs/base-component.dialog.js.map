@@ -1,0 +1,1 @@
+{"version":3,"file":"base-component.dialog.js","sourceRoot":"","sources":["../../../src/bot/dialogs/base-component.dialog.ts"],"names":[],"mappings":";;;AAAA,2DAAqD;AACrD,uDAAmD;AAEnD,MAAsB,mBAAoB,SAAQ,oCAAe;IAC/D,YAAY,EAAU;QACpB,KAAK,CAAC,EAAE,CAAC,CAAC;IACZ,CAAC;IAED,IAAW,QAAQ;QACjB,OAAO,wBAAU,CAAC,gBAAgB,CAAC;IACrC,CAAC;CAGF;AAVD,kDAUC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"liveagent.bot.js","sourceRoot":"","sources":["../../../../src/bot/core/bots/liveagent.bot.ts"],"names":[],"mappings":";;;AAEA,4DAAuD;AAEvD,MAAa,oBAAqB,SAAQ,mCAAe;IACvD;;;;;OAKG;IACH,YACE,KAAa,EACb,iBAA2B,EAC3B,SAAmB,EACnB,MAAc;QAEd,KAAK,CAAC,KAAK,EAAE,iBAAiB,EAAE,SAAS,EAAE,MAAM,CAAC,CAAC;IACrD,CAAC;CACF;AAfD,oDAeC"}
