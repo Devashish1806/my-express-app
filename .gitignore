@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /resources/dummy.json
+/lib
 /.pnp
 .pnp.js
 
